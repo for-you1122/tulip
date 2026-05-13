@@ -14,7 +14,8 @@
 }
 
 body{
-    overflow:hidden;
+    overflow-x:hidden;
+    overflow-y:auto;
     font-family:'Poppins',sans-serif;
     background:linear-gradient(to bottom,#0f172a,#1e293b,#111827);
     height:100vh;
@@ -31,7 +32,7 @@ canvas{
 }
 
 .container{
-    height:100vh;
+    min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -75,21 +76,46 @@ h1{
 }
 
 .pot{
-    width:170px;
-    height:120px;
-    background:#8b5e3c;
-    clip-path:polygon(15% 0%,85% 0%,100% 100%,0% 100%);
+    width:150px;
+    height:220px;
+    background:linear-gradient(to bottom,#d97706,#92400e);
+    border-radius:18px 18px 45px 45px;
+    position:relative;
+    box-shadow:0 15px 30px rgba(0,0,0,0.35), inset 0 0 20px rgba(255,255,255,0.1);
     position:relative;
     margin:auto;
     transition:1s;
 }
 
+.pot::after{
+    content:'';
+    position:absolute;
+    bottom:-18px;
+    left:15px;
+    width:120px;
+    height:25px;
+    background:rgba(0,0,0,0.2);
+    border-radius:50%;
+    filter:blur(6px);
+}
+
+.pot::before{
+    content:'';
+    position:absolute;
+    top:20px;
+    left:15px;
+    right:15px;
+    height:25px;
+    background:rgba(255,255,255,0.12);
+    border-radius:20px;
+}
+
 .crack{
     position:absolute;
     width:5px;
-    height:100px;
-    background:white;
-    left:50%;
+    height:130px;
+    background:#f8fafc;
+    left:48%;
     top:10px;
     transform:rotate(20deg);
     opacity:1;
@@ -98,21 +124,33 @@ h1{
 
 .tulip{
     position:absolute;
-    width:25px;
-    height:70px;
+    width:16px;
+    height:42px;
     background:linear-gradient(to top,#16a34a,#4ade80);
-    bottom:100px;
+    bottom:145px;
+}
+
+.tulip::after{
+    content:'';
+    position:absolute;
+    width:30px;
+    height:15px;
+    background:#22c55e;
+    border-radius:50%;
+    left:-10px;
+    top:15px;
+    transform:rotate(-30deg);
 }
 
 .tulip::before{
     content:'';
     position:absolute;
-    width:50px;
-    height:50px;
-    background:#ff4d88;
-    border-radius:50% 50% 10% 10%;
-    top:-35px;
-    left:-12px;
+    width:24px;
+    height:24px;
+    background:linear-gradient(to bottom,#ff4d88,#ff80ab);
+    border-radius:50% 50% 35% 35%;
+    top:-16px;
+    left:-4px;
     box-shadow:0 0 15px #ff80ab;
 }
 
@@ -142,6 +180,21 @@ button{
 button:hover{
     transform:scale(1.1);
     box-shadow:0 0 30px rgba(255,182,193,0.8);
+}
+
+.sparkle{
+    position:absolute;
+    width:4px;
+    height:4px;
+    background:white;
+    border-radius:50%;
+    animation:twinkle 2s infinite;
+}
+
+@keyframes twinkle{
+    0%{opacity:0.2;transform:scale(1)}
+    50%{opacity:1;transform:scale(2)}
+    100%{opacity:0.2;transform:scale(1)}
 }
 
 .final-scene{
@@ -242,17 +295,24 @@ button:hover{
 
 <div class="container">
 
+<audio autoplay loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8e1b3d1.mp3?filename=beautiful-piano-ambient-110624.mp3" type="audio/mpeg">
+</audio>
+
 <h1>For Veda 🌷</h1>
 
 <div class="message show" id="msg">
+<p style="margin-bottom:20px;font-size:1.1rem;color:#ffd1dc;">
+Some things feel special simply because someone cared about them the way you did, Veda 🌷
+</p>
 <div class="typewriter">
-I know your tulip pot breaking made you sad...
+I know it felt bad seeing the little tulips break before they even fully grew...
 </div>
 </div>
 
 <div class="pot-area" id="potArea">
-    <div class="tulip t1"></div>
-    <div class="tulip t2"></div>
+    <div class="tulip tulip-small t1"></div>
+    <div class="tulip tulip-small t2"></div>
 
     <div class="pot" id="pot">
         <div class="crack" id="crack"></div>
@@ -270,28 +330,31 @@ I know your tulip pot breaking made you sad...
 <div class="final-scene" id="finalScene">
     <div class="big-tulips">🌷🌷</div>
 
-    <h1>Veda, You Make Things Beautiful</h1>
+    <h1>For Veda 🌷</h1>
 
     <div class="final-text">
-        Some things break, but that never removes the beauty they carried.
+<div style="font-size:1.4rem;margin-bottom:25px;color:#fff0f6;">
+✨ A little garden made just for Veda ✨
+</div>
+        Some things don't need to fully bloom to still matter.
         <br><br>
 
-        Just like your tulips, your care is what made them special.
+        Those little tulips were special because you planted them with excitement and care.
         <br><br>
 
-        <span class="highlight">Your smile feels calming.</span>
+        <span class="highlight">You notice small beautiful things.</span>
         <br>
-        <span class="highlight">Your energy feels warm.</span>
+        <span class="highlight">That makes your presence feel comforting.</span>
         <br>
-        <span class="highlight">And your presence makes ordinary moments feel softer.</span>
+        <span class="highlight">And honestly, that's rare.</span>
         <br><br>
 
-        Even a broken flower pot could never take away the beauty you created around it.
+        And a broken tumbler cannot erase the happiness those tulips gave you.
         <br><br>
 
         So this is your little reminder:
         <br>
-        <span class="highlight">Broken things can still bloom beautifully 🌷</span>
+        <span class="highlight">Some beautiful moments stay beautiful even after they break 🌷</span>
     </div>
 </div>
 
@@ -304,6 +367,7 @@ function checkComplete(){
     if(step1 && step2 && step3){
         document.getElementById('finalScene').classList.add('show');
         createPetals();
+        createSparkles();
     }
 }
 
@@ -320,6 +384,7 @@ function heal2(){
 }
 
 function heal3(){
+    document.querySelector('.typewriter').innerHTML='Maybe this little website cannot fix the tumbler... but maybe it can make you smile for a minute.';
     step3=true;
 
     const tulips=document.querySelectorAll('.tulip');
@@ -330,6 +395,17 @@ function heal3(){
     });
 
     checkComplete();
+}
+
+function createSparkles(){
+    for(let i=0;i<60;i++){
+        let sparkle=document.createElement('div');
+        sparkle.classList.add('sparkle');
+        sparkle.style.left=Math.random()*100+'vw';
+        sparkle.style.top=Math.random()*100+'vh';
+        sparkle.style.animationDuration=(Math.random()*3+2)+'s';
+        document.body.appendChild(sparkle);
+    }
 }
 
 function createPetals(){

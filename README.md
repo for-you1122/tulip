@@ -4,452 +4,367 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Veda 🌷</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 
 <style>
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
 }
 
 body{
-    overflow-x:hidden;
-    overflow-y:auto;
-    font-family:'Poppins',sans-serif;
-    background:linear-gradient(to bottom,#0f172a,#1e293b,#111827);
-    height:100vh;
-    color:white;
+font-family:'Inter',sans-serif;
+background:#0f172a;
+color:white;
+overflow-x:hidden;
 }
 
-canvas{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    z-index:-1;
+.section{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:40px 20px;
+position:relative;
 }
 
-.container{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    text-align:center;
-    padding:20px;
+.bg{
+position:fixed;
+inset:0;
+background:radial-gradient(circle at top,#1e293b,#0f172a 60%);
+z-index:-3;
+}
+
+.blur1,.blur2{
+position:fixed;
+border-radius:50%;
+filter:blur(90px);
+z-index:-2;
+opacity:0.5;
+}
+
+.blur1{
+width:300px;
+height:300px;
+background:#ff7aa2;
+top:-50px;
+left:-50px;
+animation:move1 10s infinite alternate;
+}
+
+.blur2{
+width:350px;
+height:350px;
+background:#7dd3fc;
+bottom:-100px;
+right:-80px;
+animation:move2 12s infinite alternate;
+}
+
+@keyframes move1{
+from{transform:translateY(0px)}
+to{transform:translateY(60px)}
+}
+
+@keyframes move2{
+from{transform:translateX(0px)}
+to{transform:translateX(-60px)}
+}
+
+.card{
+width:100%;
+max-width:900px;
+backdrop-filter:blur(18px);
+background:rgba(255,255,255,0.06);
+border:1px solid rgba(255,255,255,0.1);
+border-radius:35px;
+padding:60px 35px;
+text-align:center;
+box-shadow:0 20px 50px rgba(0,0,0,0.35);
 }
 
 h1{
-    font-size:4rem;
-    font-family:'Dancing Script',cursive;
-    margin-bottom:20px;
-    color:#ffd6e7;
-    animation:glow 2s infinite alternate;
+font-family:'Playfair Display',serif;
+font-size:4rem;
+margin-bottom:20px;
+background:linear-gradient(to right,#ffd1dc,#ffffff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
-@keyframes glow{
-    from{ text-shadow:0 0 10px #ff9ec7; }
-    to{ text-shadow:0 0 25px #ffb6d5,0 0 40px #ff8db5; }
+.line{
+font-size:1.15rem;
+line-height:2;
+color:#e2e8f0;
+opacity:0;
+transform:translateY(30px);
+animation:fadeUp 1s forwards;
 }
 
-.message{
-    max-width:750px;
-    font-size:1.2rem;
-    line-height:1.9;
-    color:#f8fafc;
-    opacity:0;
-    transform:translateY(20px);
-    transition:1s;
+.line:nth-child(2){animation-delay:1s}
+.line:nth-child(3){animation-delay:2.5s}
+.line:nth-child(4){animation-delay:4s}
+.line:nth-child(5){animation-delay:5.5s}
+
+@keyframes fadeUp{
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 
-.message.show{
-    opacity:1;
-    transform:translateY(0);
+.glass{
+width:140px;
+height:220px;
+margin:50px auto;
+background:rgba(255,255,255,0.08);
+border:2px solid rgba(255,255,255,0.18);
+border-radius:25px 25px 40px 40px;
+position:relative;
+overflow:hidden;
+box-shadow:inset 0 0 30px rgba(255,255,255,0.08);
 }
 
-.pot-area{
-    position:relative;
-    margin:30px 0;
-    height:260px;
+.glass::before{
+content:'';
+position:absolute;
+inset:0;
+background:linear-gradient(to right,transparent,rgba(255,255,255,0.15),transparent);
+transform:translateX(-100%);
+animation:shine 4s infinite;
 }
 
-.pot{
-    width:150px;
-    height:220px;
-    background:linear-gradient(to bottom,#d97706,#92400e);
-    border-radius:18px 18px 45px 45px;
-    position:relative;
-    box-shadow:0 15px 30px rgba(0,0,0,0.35), inset 0 0 20px rgba(255,255,255,0.1);
-    position:relative;
-    margin:auto;
-    transition:1s;
-}
-
-.pot::after{
-    content:'';
-    position:absolute;
-    bottom:-18px;
-    left:15px;
-    width:120px;
-    height:25px;
-    background:rgba(0,0,0,0.2);
-    border-radius:50%;
-    filter:blur(6px);
-}
-
-.pot::before{
-    content:'';
-    position:absolute;
-    top:20px;
-    left:15px;
-    right:15px;
-    height:25px;
-    background:rgba(255,255,255,0.12);
-    border-radius:20px;
+@keyframes shine{
+100%{transform:translateX(200%)}
 }
 
 .crack{
-    position:absolute;
-    width:5px;
-    height:130px;
-    background:#f8fafc;
-    left:48%;
-    top:10px;
-    transform:rotate(20deg);
-    opacity:1;
-    transition:1s;
+position:absolute;
+width:3px;
+height:120px;
+background:#f8fafc;
+left:60px;
+top:50px;
+transform:rotate(20deg);
+opacity:0.7;
+}
+
+.soil{
+position:absolute;
+width:100%;
+height:65px;
+background:#3f2b1d;
+bottom:0;
 }
 
 .tulip{
-    position:absolute;
-    width:16px;
-    height:42px;
-    background:linear-gradient(to top,#16a34a,#4ade80);
-    bottom:145px;
-}
-
-.tulip::after{
-    content:'';
-    position:absolute;
-    width:30px;
-    height:15px;
-    background:#22c55e;
-    border-radius:50%;
-    left:-10px;
-    top:15px;
-    transform:rotate(-30deg);
+position:absolute;
+width:4px;
+height:65px;
+background:#22c55e;
+bottom:55px;
 }
 
 .tulip::before{
-    content:'';
-    position:absolute;
-    width:24px;
-    height:24px;
-    background:linear-gradient(to bottom,#ff4d88,#ff80ab);
-    border-radius:50% 50% 35% 35%;
-    top:-16px;
-    left:-4px;
-    box-shadow:0 0 15px #ff80ab;
+content:'';
+position:absolute;
+width:20px;
+height:20px;
+background:#ff7aa2;
+border-radius:50% 50% 40% 40%;
+top:-10px;
+left:-8px;
+box-shadow:0 0 15px rgba(255,122,162,0.5);
 }
 
-.t1{ left:40px; }
-.t2{ right:40px; }
+.t1{left:45px}
+.t2{right:45px}
 
-.buttons{
-    display:flex;
-    gap:20px;
-    flex-wrap:wrap;
-    justify-content:center;
-    margin-top:20px;
+.scroll{
+margin-top:40px;
+font-size:0.9rem;
+letter-spacing:3px;
+color:#cbd5e1;
+animation:bounce 2s infinite;
 }
 
-button{
-    padding:15px 28px;
-    border:none;
-    border-radius:50px;
-    background:linear-gradient(45deg,#ff5f9e,#ff8fab);
-    color:white;
-    font-size:1rem;
-    cursor:pointer;
-    transition:0.4s;
-    box-shadow:0 0 20px rgba(255,105,180,0.4);
+@keyframes bounce{
+50%{transform:translateY(8px)}
 }
 
-button:hover{
-    transform:scale(1.1);
-    box-shadow:0 0 30px rgba(255,182,193,0.8);
+.garden{
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+width:100%;
 }
 
-.sparkle{
-    position:absolute;
-    width:4px;
-    height:4px;
-    background:white;
-    border-radius:50%;
-    animation:twinkle 2s infinite;
+.garden-title{
+font-size:4rem;
+font-family:'Playfair Display',serif;
+margin-bottom:25px;
 }
 
-@keyframes twinkle{
-    0%{opacity:0.2;transform:scale(1)}
-    50%{opacity:1;transform:scale(2)}
-    100%{opacity:0.2;transform:scale(1)}
+.quote{
+max-width:700px;
+font-size:1.2rem;
+line-height:2;
+color:#f1f5f9;
+opacity:0;
+transform:translateY(40px);
+transition:1s;
 }
 
-.final-scene{
-    position:absolute;
-    inset:0;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    opacity:0;
-    pointer-events:none;
-    transition:2s;
-    background:radial-gradient(circle at center,#ff9ec7 0%,#1e293b 60%,#0f172a 100%);
+.quote.show{
+opacity:1;
+transform:translateY(0);
 }
 
-.final-scene.show{
-    opacity:1;
-}
-
-.final-text{
-    max-width:850px;
-    font-size:1.3rem;
-    line-height:2;
-    padding:20px;
-}
-
-.highlight{
-    color:#ffe066;
-    font-weight:700;
-}
-
-.big-tulips{
-    font-size:5rem;
-    animation:float 3s infinite ease-in-out;
+.flowers{
+margin-top:50px;
+font-size:5rem;
+letter-spacing:20px;
+animation:float 4s ease-in-out infinite;
 }
 
 @keyframes float{
-    0%{ transform:translateY(0px); }
-    50%{ transform:translateY(-15px); }
-    100%{ transform:translateY(0px); }
+50%{transform:translateY(-15px)}
 }
 
-.petals{
-    position:absolute;
-    width:15px;
-    height:15px;
-    background:pink;
-    border-radius:50% 0 50% 50%;
-    opacity:0.7;
-    animation:fall linear infinite;
+.petals span{
+position:absolute;
+font-size:20px;
+animation:fall linear infinite;
+opacity:0.8;
 }
 
 @keyframes fall{
-    from{
-        transform:translateY(-100px) rotate(0deg);
-    }
-    to{
-        transform:translateY(110vh) rotate(360deg);
-    }
+from{
+transform:translateY(-100px) rotate(0deg);
 }
 
-.typewriter{
-    overflow:hidden;
-    border-right:3px solid white;
-    white-space:nowrap;
-    animation:typing 5s steps(40,end),blink .8s infinite;
+to{
+transform:translateY(110vh) rotate(360deg);
+}
 }
 
-@keyframes typing{
-    from{ width:0 }
-    to{ width:100% }
-}
-
-@keyframes blink{
-    50%{ border-color:transparent }
+.highlight{
+color:#ffd1dc;
+font-weight:600;
 }
 
 @media(max-width:768px){
-    h1{
-        font-size:2.8rem;
-    }
+h1,.garden-title{
+font-size:2.6rem;
+}
 
-    .message,.final-text{
-        font-size:1rem;
-    }
+.card{
+padding:45px 20px;
+}
 
-    .typewriter{
-        white-space:normal;
-        border:none;
-        animation:none;
-    }
+.line,.quote{
+font-size:1rem;
+}
 }
 </style>
 </head>
 <body>
 
-<canvas id="stars"></canvas>
+<div class="bg"></div>
+<div class="blur1"></div>
+<div class="blur2"></div>
 
-<div class="container">
+<div class="petals" id="petals"></div>
 
-<audio autoplay loop>
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8e1b3d1.mp3?filename=beautiful-piano-ambient-110624.mp3" type="audio/mpeg">
-</audio>
+<section class="section">
+<div class="card">
 
 <h1>For Veda 🌷</h1>
 
-<div class="message show" id="msg">
-<p style="margin-bottom:20px;font-size:1.1rem;color:#ffd1dc;">
-Some things feel special simply because someone cared about them the way you did, Veda 🌷
+<p class="line">
+I know it felt bad seeing the little tulips break before they even fully grew.
 </p>
-<div class="typewriter">
-I know it felt bad seeing the little tulips break before they even fully grew...
-</div>
-</div>
 
-<div class="pot-area" id="potArea">
-    <div class="tulip tulip-small t1"></div>
-    <div class="tulip tulip-small t2"></div>
-
-    <div class="pot" id="pot">
-        <div class="crack" id="crack"></div>
-    </div>
+<div class="glass">
+<div class="crack"></div>
+<div class="soil"></div>
+<div class="tulip t1"></div>
+<div class="tulip t2"></div>
 </div>
 
-<div class="buttons">
-    <button onclick="heal1()">Pick up the pieces ✨</button>
-    <button onclick="heal2()">Give sunlight ☀️</button>
-    <button onclick="heal3()">Water the tulips 💧</button>
+<p class="line">
+But maybe beautiful things are not only beautiful when they survive forever.
+</p>
+
+<p class="line">
+Sometimes they become special simply because someone cared for them deeply.
+</p>
+
+<p class="line">
+And honestly... the way you notice small beautiful things says a lot about you.
+</p>
+
+<div class="scroll">
+SCROLL ↓
 </div>
 
 </div>
+</section>
 
-<div class="final-scene" id="finalScene">
-    <div class="big-tulips">🌷🌷</div>
+<section class="section">
+<div class="garden">
 
-    <h1>For Veda 🌷</h1>
+<h2 class="garden-title">A Small Garden For Veda</h2>
 
-    <div class="final-text">
-<div style="font-size:1.4rem;margin-bottom:25px;color:#fff0f6;">
-✨ A little garden made just for Veda ✨
+<div class="flowers">🌷 ✨ 🌷</div>
+
+<p class="quote" id="quote">
+Those tulips may not have fully bloomed yet,
+<br><br>
+but the excitement with which you planted them still mattered.
+<br><br>
+<span class="highlight">You have a calming kind of presence.</span>
+<br>
+<span class="highlight">The type that notices little things others ignore.</span>
+<br><br>
+And that makes ordinary moments feel softer.
+<br><br>
+So maybe this little website cannot fix the broken tumbler...
+<br>
+but maybe it can remind you that some beautiful moments stay beautiful even after they break 🌷
+</p>
+
 </div>
-        Some things don't need to fully bloom to still matter.
-        <br><br>
-
-        Those little tulips were special because you planted them with excitement and care.
-        <br><br>
-
-        <span class="highlight">You notice small beautiful things.</span>
-        <br>
-        <span class="highlight">That makes your presence feel comforting.</span>
-        <br>
-        <span class="highlight">And honestly, that's rare.</span>
-        <br><br>
-
-        And a broken tumbler cannot erase the happiness those tulips gave you.
-        <br><br>
-
-        So this is your little reminder:
-        <br>
-        <span class="highlight">Some beautiful moments stay beautiful even after they break 🌷</span>
-    </div>
-</div>
+</section>
 
 <script>
-let step1=false;
-let step2=false;
-let step3=false;
+const quote=document.getElementById('quote');
 
-function checkComplete(){
-    if(step1 && step2 && step3){
-        document.getElementById('finalScene').classList.add('show');
-        createPetals();
-        createSparkles();
-    }
+window.addEventListener('scroll',()=>{
+const top=quote.getBoundingClientRect().top;
+
+if(top<window.innerHeight-100){
+quote.classList.add('show');
 }
+})
 
-function heal1(){
-    step1=true;
-    document.getElementById('crack').style.opacity='0';
-    checkComplete();
+const petals=document.getElementById('petals');
+
+for(let i=0;i<35;i++){
+let span=document.createElement('span');
+span.innerHTML='🌸';
+span.style.left=Math.random()*100+'vw';
+span.style.animationDuration=(Math.random()*5+5)+'s';
+span.style.animationDelay=Math.random()*5+'s';
+petals.appendChild(span);
 }
-
-function heal2(){
-    step2=true;
-    document.body.style.background='linear-gradient(to bottom,#f9a8d4,#7dd3fc,#1e293b)';
-    checkComplete();
-}
-
-function heal3(){
-    document.querySelector('.typewriter').innerHTML='Maybe this little website cannot fix the tumbler... but maybe it can make you smile for a minute.';
-    step3=true;
-
-    const tulips=document.querySelectorAll('.tulip');
-
-    tulips.forEach(t=>{
-        t.style.transform='scale(1.2) translateY(-10px)';
-        t.style.transition='1s';
-    });
-
-    checkComplete();
-}
-
-function createSparkles(){
-    for(let i=0;i<60;i++){
-        let sparkle=document.createElement('div');
-        sparkle.classList.add('sparkle');
-        sparkle.style.left=Math.random()*100+'vw';
-        sparkle.style.top=Math.random()*100+'vh';
-        sparkle.style.animationDuration=(Math.random()*3+2)+'s';
-        document.body.appendChild(sparkle);
-    }
-}
-
-function createPetals(){
-    for(let i=0;i<40;i++){
-        let petal=document.createElement('div');
-        petal.classList.add('petals');
-        petal.style.left=Math.random()*100+'vw';
-        petal.style.animationDuration=(Math.random()*5+5)+'s';
-        petal.style.opacity=Math.random();
-        document.body.appendChild(petal);
-    }
-}
-
-const canvas=document.getElementById('stars');
-const ctx=canvas.getContext('2d');
-
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-
-let stars=[];
-
-for(let i=0;i<120;i++){
-    stars.push({
-        x:Math.random()*canvas.width,
-        y:Math.random()*canvas.height,
-        r:Math.random()*2
-    });
-}
-
-function drawStars(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-
-    ctx.fillStyle='white';
-
-    stars.forEach(star=>{
-        ctx.beginPath();
-        ctx.arc(star.x,star.y,star.r,0,Math.PI*2);
-        ctx.fill();
-    });
-
-    requestAnimationFrame(drawStars);
-}
-
-drawStars();
 </script>
 
 </body>
